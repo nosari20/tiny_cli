@@ -29,6 +29,8 @@ namespace Cli {
 
                     }
 
+                }else{
+                    options.insert(std::pair<std::string, std::string>(argumentValue, ""));
                 }
                 continue;
             }
@@ -73,6 +75,11 @@ namespace Cli {
        return "";
     }
 
+    bool App::hasOption(std::string opt)
+    {
+        return (options.find(opt) != options.end());
+    }
+
     std::string App::option(std::string opt)
     {
         if(options.find(opt) != options.end())
@@ -80,7 +87,7 @@ namespace Cli {
         return "";
     }
 
-    bool App::flag(std::string flag)
+    bool App::hasFlag(std::string flag)
     {
        return (std::find(flags.begin(), flags.end(), flag) != flags.end());
     }
@@ -96,7 +103,11 @@ namespace Cli {
         std::cerr << "Options : " << std::endl;
         std::map<std::string, std::string>::iterator pos;
         for (pos = options.begin(); pos != options.end(); ++pos) {
-             std::cerr << pos->first << " = " << pos->second << std::endl;
+            if(pos->second != "")
+                std::cerr << pos->first << " = " << pos->second << std::endl;
+            else
+                std::cerr << pos->first << std::endl;
+
         }
 
         std::cerr << "Flags : " << std::endl;

@@ -19,8 +19,9 @@ namespace Cli {
             static const std::string OPTION_PREFIX;
 
             std::string arg(int index);
+            bool hasOption(std::string option);
             std::string option(std::string option);
-            bool flag(std::string flag);
+            bool hasFlag(std::string flag);
 
             void debug();
 
